@@ -3,7 +3,7 @@
 **Spotlight** (EventExplorer) is an Android mobile application built using **Kotlin** that allows users to explore, save, and interact with local events in their community.  
 The app integrates multiple Android components such as **Firebase Authentication**, **SQLite Database**, **Google Maps**, **Multimedia (Audio/Video)**, and **Accelerometer Sensors** to deliver a modern and interactive event discovery experience.
 
----
+--
 
 ## 🧭 Project Overview
 
@@ -19,6 +19,10 @@ It brings together multiple Android concepts into a single cohesive prototype, d
 - Redirects authenticated users directly to the Home screen.
 - Prevents unauthorized access to event data.
 
+<img width="208" height="458" alt="image" src="https://github.com/user-attachments/assets/a2f54807-55b5-488a-ad78-412a4ab35f93" />
+
+<img width="205" height="457" alt="image" src="https://github.com/user-attachments/assets/814f3f3b-9393-4900-9111-5c066763e6bf" />
+
 ### 🏠 Dynamic Home Page
 - Displays events using **RecyclerView** in a clean, scrollable list.
 - Toolbar includes:
@@ -27,17 +31,23 @@ It brings together multiple Android concepts into a single cohesive prototype, d
   - **Logout** button (right)
 - Features a **Search Bar** (top right) that filters events by name in real-time.
 
+<img width="224" height="498" alt="image" src="https://github.com/user-attachments/assets/d4bb4947-5e08-428f-a254-40d27dd3d24a" />
+
 ### 🗺️ Google Maps Integration
 - Shows all event locations with **custom markers**.
 - Includes user’s **current GPS location**.
 - Tapping “View on Map” in an event detail centers the map on that specific event.
+
+<img width="186" height="407" alt="image" src="https://github.com/user-attachments/assets/968119db-67a2-480e-ba99-770ae3e08d2a" />
 
 ### 💾 Database Integration (SQLite)
 - Local database with two tables:
   - `events` – all available events.
   - `saved_events` – events user has saved.
 - Prevents duplicate entries.
-- Supports adding, viewing, and deleting saved events.
+- Supports adding, viewing, and deleting saved events.\
+
+<img width="236" height="529" alt="image" src="https://github.com/user-attachments/assets/83a55667-9b79-4d26-a534-22930bd05889" />
 
 ### 🎬 Multimedia Integration
 - Each event has a **promotional video or audio**.
@@ -45,6 +55,8 @@ It brings together multiple Android concepts into a single cohesive prototype, d
 - Examples:
   - 🎵 *Music Fest* – plays MP3 background music.
   - 🎥 *Food Carnival / Fun Fair / Art Exhibit* – plays MP4 event video.
+ 
+<img width="206" height="457" alt="image" src="https://github.com/user-attachments/assets/5ea19c2b-dd4d-47b0-a0c2-d7d6559d27db" />
 
 ### 📱 Sensor Integration (Accelerometer)
 - Detects **shake gesture** using accelerometer.
@@ -130,21 +142,6 @@ app/src/main/res/
 
 ---
 
-## 📸 Suggested Screenshots
-
-You can include these later in your README using markdown:
-```markdown
-![Login Screen](screenshots/login.png)
-![Home Page](screenshots/home.png)
-![Event Detail](screenshots/event_detail.png)
-![Google Maps](screenshots/maps.png)
-![Saved Events](screenshots/saved_events.png)
-![Undo Dialog](screenshots/undo_dialog.png)
-![Search Feature](screenshots/search.png)
-```
-
----
-
 ## 🧭 Roadmap & Future Enhancements
 
 - 🔍 **Search Bar Integration** (Completed)
@@ -153,24 +150,3 @@ You can include these later in your README using markdown:
 - 🔔 **Push Notifications** for upcoming events.
 - 🌐 **Firebase Realtime Database** for live event updates.
 - 🎨 **UI Enhancements** with animations and transitions.
-
----
-
-## 🧑‍💻 Author
-
-**Shivam Patel**  
-🎓 Software Engineering | Ontario Tech University  
-📍 Oshawa, Ontario, Canada  
-🔗 [GitHub Profile](https://github.com/spatel12696)
-
----
-
-## 📜 License
-
-This project is developed for **educational purposes** as part of the  
-_Mobile Application Development_ course at Ontario Tech University.  
-All included media assets are for demonstration only.
-
----
-
-✨ _“Discover. Experience. Connect. — Spotlight brings local events to life.”_
