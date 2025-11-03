@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#FFD700"
+    android:elevation="6dp"
+    android:paddingHorizontal="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Left: Map Button -->
+        <ImageButton
+            android:id="@+id/mapButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_map"
+            android:contentDescription="Map" />
+
+        <!-- Center: App Title -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Spotlight"
+            android:textColor="#101820"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <!-- Right: Saved Events -->
+        <ImageButton
+            android:id="@+id/savedEventsButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_star"
+            android:contentDescription="Saved Events" />
+
+        <!-- Right: Logout -->
+        <ImageButton
+            android:id="@+id/logoutButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_logout"
+            android:contentDescription="Logout" />
+    </LinearLayout>
+</androidx.appcompat.widget.Toolbar>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#101820"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- 🟡 Event Name -->
+        <TextView
+            android:id="@+id/eventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Name"
+            android:textColor="#FFD700"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+
+        <!-- 📍 Location -->
+        <TextView
+            android:id="@+id/eventLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📍 Location"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="5dp" />
+
+        <!-- 🗓 Date & Time -->
+        <TextView
+            android:id="@+id/eventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🗓 Date"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="15dp" />
+
+        <!-- 📜 Description -->
+        <TextView
+            android:id="@+id/eventDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event Description"
+            android:textColor="#CCCCCC"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- 🎥 Video Preview -->
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible" /> <!-- ✅ Make visible -->
+
+        <!-- 🔊 Optional Audio Label (for Music Fest) -->
+        <TextView
+            android:id="@+id/audioIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎵 Playing event audio..."
+            android:textColor="#FFD700"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:layout_marginBottom="15dp" />
+
+        <!-- 🗺 View on Map Button -->
+        <Button
+            android:id="@+id/viewOnMapButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View on Map"
+            android:backgroundTint="#FFD700"
+            android:textColor="#101820"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp" />
+
+        <!-- 💾 Save/Remove Button -->
+        <Button
+            android:id="@+id/saveEventButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to Saved Events"
+            android:backgroundTint="#FFD700"
+            android:textColor="#101820"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp" />
+
+        <!-- 🔙 Back Button -->
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:backgroundTint="#444444"
+            android:textColor="#FFD700"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+
+    </LinearLayout>
+</ScrollView>
