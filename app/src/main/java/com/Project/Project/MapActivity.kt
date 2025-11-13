@@ -26,6 +26,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private var eventLat: Double = 0.0
     private var eventLng: Double = 0.0
     private var eventName: String? = null
+    private var showAllEvents = false
     private val LOCATION_PERMISSION_REQUEST_CODE = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        // ✅ Get event location if available
+        // ✅ Check if showing all events
+        showAllEvents = intent.getBooleanExtra("showAllEvents", false)
+
+        // ✅ Get single event data if available
         eventLat = intent.getDoubleExtra("latitude", 0.0)
         eventLng = intent.getDoubleExtra("longitude", 0.0)
         eventName = intent.getStringExtra("eventName")
@@ -49,6 +53,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         map.uiSettings.isZoomControlsEnabled = true
+        map.uiSettings.isMyLocationButtonEnabled = true
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
@@ -67,7 +72,28 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun showUserLocation() {
         map.isMyLocationEnabled = true
 
-        if (eventLat != 0.0 && eventLng != 0.0) {
+        if (showAllEvents) {
+            // 🟡 Show all events from database
+            val dbHelper = EventDatabaseHelper(this)
+            val events = dbHelper.getAllEvents()
+
+            for (event in events) {
+                val position = LatLng(event.latitude, event.longitude)
+                map.addMarker(
+                    MarkerOptions()
+                        .position(position)
+                        .title(event.name)
+                        .snippet(event.location)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                )
+            }
+
+            // Center camera roughly around Oshawa
+            val defaultCenter = LatLng(43.945, -78.895)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultCenter, 12f))
+
+        } else if (eventLat != 0.0 && eventLng != 0.0) {
+            // 🟢 Show single event
             val eventLoc = LatLng(eventLat, eventLng)
             map.addMarker(
                 MarkerOptions()
@@ -77,9 +103,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             )
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLoc, 15f))
         } else {
+            // 🟣 Default fallback
             fusedLocationClient.lastLocation.addOnSuccessListener { loc: Location? ->
                 val fallback = loc?.let { LatLng(it.latitude, it.longitude) }
-                    ?: LatLng(43.8971, -78.8658)
+                    ?: LatLng(43.945, -78.895)
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(fallback, 12f))
             }
         }

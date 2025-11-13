@@ -19,7 +19,7 @@
         <!-- 🔑 Google Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD7lPFninL6TtSg8u4C5MIO3-11a0MUcMg" />
+            android:value="API_KEY" />
 
         <!-- 🌐 Firebase Initialization -->
         <meta-data

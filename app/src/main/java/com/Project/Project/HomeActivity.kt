@@ -25,7 +25,6 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var adapter: EventAdapter
     private lateinit var allEvents: List<Event>
 
-    // Shake sensor variables
     private lateinit var sensorManager: SensorManager
     private var lastUpdate: Long = 0
     private var lastX = 0f
@@ -47,8 +46,11 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
         val logoutBtn = findViewById<ImageButton>(R.id.logoutButton)
         val searchBtn = findViewById<ImageButton>(R.id.searchButton)
 
+        // 🗺️ Open map showing ALL events
         mapBtn.setOnClickListener {
-            startActivity(Intent(this, MapActivity::class.java))
+            val intent = Intent(this, MapActivity::class.java)
+            intent.putExtra("showAllEvents", true)
+            startActivity(intent)
         }
 
         savedBtn.setOnClickListener {
@@ -67,7 +69,6 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
             toggleSearchView()
         }
 
-        // Setup accelerometer
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensorManager.registerListener(
             this,
@@ -82,14 +83,12 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
 
     private fun loadEvents() {
         val events = dbHelper.getAllEvents()
-
-        // Seed only if DB has fewer than 8 events
         if (events.size < 8) {
             dbHelper.addEvent(
                 Event(
                     name = "Downtown Music Fest",
                     location = "Oshawa Centre",
-                    date = "Nov 10, 2025",
+                    date = "Nov 15, 2025",
                     time = "6:00 PM",
                     description = "Live bands and food trucks in downtown Oshawa!",
                     latitude = 43.945,
@@ -192,7 +191,6 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
         recyclerView.adapter = adapter
     }
 
-    // 🔍 Search View Dialog
     private fun toggleSearchView() {
         val searchView = SearchView(this)
         searchView.queryHint = "Search events..."
@@ -204,7 +202,6 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
             .setTitle("Search Events")
             .setView(searchView)
             .setNegativeButton("Close") { _, _ ->
-                // Reset to all events when dialog is closed
                 filterEvents(null)
             }
             .create()
@@ -224,10 +221,8 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
         dialog.show()
     }
 
-    // 🔍 Filtering logic
     private fun filterEvents(query: String?) {
         val filteredList = if (query.isNullOrBlank()) {
-            // ✅ Reset to full list when cleared
             dbHelper.getAllEvents()
         } else {
             allEvents.filter { it.name.contains(query, ignoreCase = true) }
@@ -249,7 +244,6 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
         recyclerView.adapter = adapter
     }
 
-    // 🌀 Shake detection
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
             val x = event.values[0]
@@ -260,10 +254,8 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
             if ((currentTime - lastUpdate) > 150) {
                 val diffTime = currentTime - lastUpdate
                 lastUpdate = currentTime
-
                 val speed = abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000
                 if (speed > 700) showUndoDialog()
-
                 lastX = x
                 lastY = y
                 lastZ = z
